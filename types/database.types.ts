@@ -75,19 +75,25 @@ export type Database = {
         Row: {
           created_at: string
           display_name: string | null
+          email: string | null
           id: string
+          is_pro: boolean
           stripe_customer_id: string | null
         }
         Insert: {
           created_at?: string
           display_name?: string | null
+          email?: string | null
           id: string
+          is_pro?: boolean
           stripe_customer_id?: string | null
         }
         Update: {
           created_at?: string
           display_name?: string | null
+          email?: string | null
           id?: string
+          is_pro?: boolean
           stripe_customer_id?: string | null
         }
         Relationships: []
