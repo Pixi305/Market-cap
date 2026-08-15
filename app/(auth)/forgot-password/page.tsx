@@ -1,55 +1,45 @@
 import Link from "next/link";
-import { signUp } from "../actions";
+import { sendPasswordReset } from "../actions";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { PasswordInput } from "@/components/auth/PasswordInput";
 
-export default async function SignupPage({
+export default async function ForgotPasswordPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; message?: string }>;
 }) {
-  const { error } = await searchParams;
+  const { error, message } = await searchParams;
 
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-xl font-semibold text-neutral-900">Create your account</h1>
+        <h1 className="text-xl font-semibold text-neutral-900">Reset your password</h1>
         <p className="mt-1 text-sm text-neutral-500">
-          Track live prices, news, and your portfolio.
+          Enter your email and we&apos;ll send you a reset link.
         </p>
       </div>
 
+      {message && (
+        <p className="rounded-md bg-success-50 px-3 py-2 text-sm text-success-600">{message}</p>
+      )}
       {error && (
         <p className="rounded-md bg-danger-50 px-3 py-2 text-sm text-danger-600">{error}</p>
       )}
 
-      <form action={signUp} className="space-y-4">
+      <form action={sendPasswordReset} className="space-y-4">
         <div className="space-y-1.5">
           <label htmlFor="email" className="text-sm font-medium text-neutral-700">
             Email
           </label>
           <Input id="email" name="email" type="email" autoComplete="email" required />
         </div>
-        <div className="space-y-1.5">
-          <label htmlFor="password" className="text-sm font-medium text-neutral-700">
-            Password
-          </label>
-          <PasswordInput
-            id="password"
-            name="password"
-            autoComplete="new-password"
-            minLength={6}
-            required
-          />
-        </div>
         <Button type="submit" intent="brand" className="w-full">
-          Sign up
+          Send reset link
         </Button>
       </form>
 
       <p className="text-center text-sm text-neutral-500">
-        Already have an account?{" "}
+        Remember your password?{" "}
         <Link href="/login" className="font-medium text-brand-600 hover:underline">
           Log in
         </Link>

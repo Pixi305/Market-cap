@@ -2,6 +2,7 @@ import Link from "next/link";
 import { signIn } from "../actions";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { PasswordInput } from "@/components/auth/PasswordInput";
 
 export default async function LoginPage({
   searchParams,
@@ -33,16 +34,18 @@ export default async function LoginPage({
           <Input id="email" name="email" type="email" autoComplete="email" required />
         </div>
         <div className="space-y-1.5">
-          <label htmlFor="password" className="text-sm font-medium text-neutral-700">
-            Password
-          </label>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required
-          />
+          <div className="flex items-center justify-between">
+            <label htmlFor="password" className="text-sm font-medium text-neutral-700">
+              Password
+            </label>
+            <Link
+              href="/forgot-password"
+              className="text-xs font-medium text-brand-600 hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
+          <PasswordInput id="password" name="password" autoComplete="current-password" required />
         </div>
         <Button type="submit" intent="brand" className="w-full">
           Log in
